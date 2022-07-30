@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | Tiger Analytics</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}" />
+  <link rel="stylesheet" href="{{url_for('static', filename='css/custom.css')}}" />
+  <script src="{{url_for('static', filename='js/bootstrap.bundle.js')}}"></script>
+  <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+  <link rel="shortcut icon" href="{{url_for('static', filename='img/ico.ico')}}">
+
+</head>
+
+<body class="gradient-custom-2">
+
+  <!-- Section: Design Block -->
+  <section class="">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start ">
+      <div class="container">
+        <div class="row gx-lg-5 align-items-center">
+          <div class="col-lg-6 mb-5 mb-lg-0 bg-white">
+            <img src="{{url_for('static', filename='img/ico.ico')}}" height="150px" />
+            <h1 class="my-3 display-3 fw-bold ls-tight">
+              Sign Up <br />
+              <span class="text-primary">to access store</span>
+            </h1>
+            <p style="color: hsl(217, 10%, 50.8%)">
+              Our vision is to build the world’s best advanced analytics firm that solves high impact business problems
+              using data. The only way to achieve this is by attracting exceptional people and giving them the right
+              guidance, opportunities, and freedom to excel in their areas of interest.
+            </p>
+          </div>
+
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card">
+              <div class="card-body py-5 px-md-5">
+                <form method="post" action="/signup">
+                  <!-- 2 column grid layout with text inputs for the first and last names -->
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <label class="form-label" for="form3Example1">First name</label>
+
+                        <input type="text" id="form3Example1" class="form-control" name="fname"
+                          placeholder="First Name" />
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <label class="form-label" for="form3Example2">Last name</label>
+
+                        <input type="text" id="form3Example2" class="form-control" name="lname"
+                          placeholder="Last Name" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example3">Email address</label>
+
+                    <input type="email" id="form3Example3" class="form-control" name="email" placeholder="Email" />
+                  </div>
+
+                  <!-- Password input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example4">Password</label>
+
+                    <input type="password" class="form-control" name="pwd" placeholder="Password" id="pwd" />
+                  </div>
+                  <div id="message">
+                    <h5>Password must contain the following:</h5>
+                    <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                    <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                    <p id="number" class="invalid">A <b>number</b></p>
+                    <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                  </div>
+
+                  {%
+                  if value == 'exits':
+                  %}
+                  <p class="bg-danger text-white p-1"><b>User Already Present in Database</b></p>
+                  {% endif %}
+                  <!-- Submit button -->
+                  <button type="submit" class="btn btn-primary btn-block mb-4">
+                    Sign up
+                  </button>
+
+                  <a class="text-muted" href="/login">Back to Login.!</a>
+
+
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Jumbotron -->
+  </section>
+  <!-- Section: Design Block -->
+  <p class="text-center text-white">Tiger Analytics India Consulting Private Limited
+  </p>
+</body>
+
+</html>
+
+<script>
+  var myInput = document.getElementById("pwd");
+  var letter = document.getElementById("letter");
+  var capital = document.getElementById("capital");
+  var number = document.getElementById("number");
+  var length = document.getElementById("length");
+
+  // When the user clicks on the password field, show the message box
+  myInput.onfocus = function () {
+    document.getElementById("message").style.display = "block";
+  }
+
+  // When the user clicks outside of the password field, hide the message box
+  myInput.onblur = function () {
+    document.getElementById("message").style.display = "none";
+  }
+
+  // When the user starts to type something inside the password field
+  myInput.onkeyup = function () {
+    // Validate lowercase letters
+    var lowerCaseLetters = /[a-z]/g;
+    if (myInput.value.match(lowerCaseLetters)) {
+      letter.classList.remove("invalid");
+      letter.classList.add("valid");
+    } else {
+      letter.classList.remove("valid");
+      letter.classList.add("invalid");
+    }
+
+    // Validate capital letters
+    var upperCaseLetters = /[A-Z]/g;
+    if (myInput.value.match(upperCaseLetters)) {
+      capital.classList.remove("invalid");
+      capital.classList.add("valid");
+    } else {
+      capital.classList.remove("valid");
+      capital.classList.add("invalid");
+    }
+
+    // Validate numbers
+    var numbers = /[0-9]/g;
+    if (myInput.value.match(numbers)) {
+      number.classList.remove("invalid");
+      number.classList.add("valid");
+    } else {
+      number.classList.remove("valid");
+      number.classList.add("invalid");
+    }
+
+    // Validate length
+    if (myInput.value.length >= 8) {
+      length.classList.remove("invalid");
+      length.classList.add("valid");
+    } else {
+      length.classList.remove("valid");
+      length.classList.add("invalid");
+    }
+  }
+
+
+</script>

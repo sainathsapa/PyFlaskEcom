@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Tiger Analytics</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/custom.css')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.bundle.js')}}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/ico.ico')}}">
+
+</head>
+
+<body id="page-top" class="gradient-custom-2 ">
+    <!-- Navigation-->
+    <nav class="navbar gradient-custom-2 navbar-expand-lg text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand"><img src="{{url_for('static', filename='img/tig.jpg')}}" height="50px"> Tiger
+                eCommerce</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    {% if show == 'false'%}
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="login">Login
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i></a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="signup">Sign
+                            Up <i class="fa-solid fa-user-plus"></i></a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                            href="https://www.tigeranalytics.com/">Company Website <i
+                                class="fa-solid fa-earth-asia"></i></a></li>
+
+                    {%else%}
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                            href="products">Dashboard
+                            <i class="fa-solid fa-box"></i></a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                            href="https://www.tigeranalytics.com/">Company Website <i
+                                class="fa-solid fa-earth-asia"></i></a></li>
+                    {%endif%}
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br />
+    <br />
+    <br />
+    <!-- Masthead-->
+    <header class="text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <!-- Masthead Avatar Image-->
+            <img class="masthead-avatar mb-5" src="{{url_for('static', filename='img/ico.ico')}}" alt="..." />
+            <!-- Masthead Heading-->
+            <h1 class="masthead-heading text-uppercase mb-0">Python Assignment</h1>
+            <!-- Icon Divider-->
+
+            <!-- Masthead Subheading-->
+            <p class="masthead-subheading font-weight-light mb-0">eCommerce WebApp Using Flask and MongoDB</p>
+
+        </div>
+        <b>Submitted BY</b>
+
+        <div class="row">
+            <div class="col-lg-4 ms-auto">
+                <u><b>INTERN</b></u><br>
+                # <b>Sainath Sapa</b>, <i>Data Engineering Intern</i> <b>[ 7518 ]</b><br>
+                (Teegala Krishna Reddy Engineering College, Hyderabad)
+
+            </div>
+            <div class="col-lg-4 me-auto">
+                <u><b>MENTOR</b></u><br>
+                # <b>Sandeep Arora</b>, <i>Senior Software Engineer</i> <b>[ 2856 ]</b><br>
+                (BDE Azure)
+
+            </div>
+        </div>
+    </header>
+    <br />
+    
+    <section class="page-section text-white mb-0">
+        <div class="container">
+            <!-- Project Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-white"><i>Project Details</i></h2>
+
+            <!-- Project Section Content-->
+            <div class="row">
+                <div class="col-md-4 ms-auto">
+                    <p class="lead"><b>BackEnd</b></p>
+                    <ul>
+                        <li><i class="fa-brands fa-python"></i> Python 3.6 </li>
+                        <li><span class="iconify" data-icon="bxl:flask"></span> Flask</li>
+                        <li><span class="iconify" data-icon="simple-icons:mongodb"></span>
+                            MongoDB</li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-4 ms-auto">
+                    <p class="lead"><b>Front-End</b></p>
+                   <ul>
+                       <li><span class="iconify" data-icon="typcn:html5"></span> HTML5</li>
+                       <li><span class="iconify" data-icon="bxl:css3"></span> CSS3</li>
+                       <li><span class="iconify" data-icon="cib:bootstrap"></span> Boostrap</li>
+                       <li><span class="iconify" data-icon="akar-icons:javascript-fill"></span> JavaScript</li>
+                       <li><i class="fa-solid fa-table-list"></i> DataTables</li>
+                       <li><i class="fa-solid fa-font-awesome"></i> Font Awesome</li>
+                       
+                       
+                   </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Copyright Section-->
+    <div class="copyright py-4 text-center text-white">
+        <div class="container"><small>Copyright &copy; Tiger Analytics India Consulting Private Limited 2022</small>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+<style>
+    ul>li{
+        font-weight: bold;
+    }
+</style>

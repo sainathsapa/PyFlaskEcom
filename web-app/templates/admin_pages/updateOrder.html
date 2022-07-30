@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> User Order - Tiger Analytics</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/custom.css')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="  https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" />
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/ico.ico')}}">
+
+</head>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+
+<script src="{{url_for('static', filename='js/bootstrap.bundle.js')}}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<body class="gradient-custom-2">
+<br>
+    <section style="background-color: #eee;" class="container card">
+        <h1><i class="fa-solid fa-box-archive"></i> User Order</h1>
+        <hr>
+        <b>User Email : <u class="text-danger">{{order.userID}}</u></b>
+        <b>Order ID : {{order._id}}</b>
+        <b>Total Order Quantity : {{orderQty}}</b>
+        <b>Total Order Value : Rs. {{orderPrice}} /-</b>
+        <form method="post" action="updateOrder">
+            <input type="hidden" name="id" value="{{order._id}}" />
+            <b>Order Status :
+                <select class="col-md-2 col-sm-2 col-lg-2 " name="status" id="status">
+                    <option value="Ordered">Orderd</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="Delivered">Delivered</option>
+
+                </select>
+            </b>
+            <button type="submit" class="btn btn-primary btn-sm">Update</button>
+        </form>
+        <hr>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <th>Item Image</th>
+                <th>Item Name</th>
+                <th>Item Desc</th>
+                <th>Item Price</th>
+                <th>Item Qty</th>
+            </thead>
+            <tbody>
+                {% for i in range(0,length)%}
+                <tr>
+                    <td><img src="/static/{{order['itemImage'][i]}}" height="150px"/></td>
+                    <td>{{order['itemName'][i]}}</td>
+                    <td>{{order['itemDesc'][i]}}</td>
+                    <td>{{order['itemPrice'][i]}}</td>
+                    <td>{{order['itemQty'][i]}}</td>
+
+
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+
+    </section>
+</body>
+
+</html>

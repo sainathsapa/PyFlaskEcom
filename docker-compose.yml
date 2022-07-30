@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  MongoDB:
+      image: mongo
+      build:
+        context: .
+        dockerfile: ./web-app/mongo/Dockerfile
+      container_name: MongoDB_Container
+      ports: 
+        - 27017:27017
+      expose:
+        - 27017
+
+  pythonApp:
+    image: python
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: Flask_Container
+  
+    ports:
+      - 7731:7731
+      # - 27017:27017
+  

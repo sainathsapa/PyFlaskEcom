@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> List Orders - Tiger Analytics</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/custom.css')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="  https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" />
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/ico.ico')}}">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+
+    <script src="{{url_for('static', filename='js/bootstrap.bundle.js')}}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+</head>
+
+<body class="gradient-custom-2">
+    <br>
+    <section style="background-color: #eee;" class="container card">
+        <h1><i class="fa-solid fa-boxes-packing"></i> User Orders</h1>
+        {%if update=='true'%}
+        <div class="alert alert-success" role="alert">
+            Order <b>{{id}}</b> has been updated </div>
+
+        {%endif %}
+        {%if deleted=='true'%}
+        <div class="alert alert-danger" role="alert">
+            Order <b>{{id}}</b> has been deleted </div>
+
+        {%endif %}
+        <hr>
+        <h2>Indicators</h2>
+        <div class="row col-md-12">
+            <div class="col-md-3">
+                <div class="p-1 m-1 bg-primary text-white">Ordered</div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="p-1 m-1 bg-warning text-dark">Shipped</div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="p-1 m-1 bg-success text-white">Delivered</div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="p-1 m-1 bg-danger text-white">Cancelled</div>
+
+            </div>
+
+
+        </div>
+
+        <hr>
+        <table class="table table-bordered table-hover" id="tblDefault">
+            <thead class="table-dark">
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Ordered User</th>
+                <th>Ordered Status</th>
+                <th>View / Delete</th>
+            </thead>
+            <tbody>
+                {% for order in listOrders%}
+                <tr {%if order['orderStatus']=='Ordered' %} class="bg-primary text-white" {%endif %} {%if
+                    order['orderStatus']=='Cancelled' %} class="bg-danger text-white" {%endif %} {%if
+                    order['orderStatus']=='Shipped' %} class="bg-warning text-dark" {%endif %} {%if
+                    order['orderStatus']=='Delivered' %} class="bg-success text-white" {%endif %}>
+                    <td>{{order['_id']}}</td>
+                    <td>{{order['orderDate']}}</td>
+                    <td>{{order['userID']}}</td>
+                    <td>{{order['orderStatus']}}</td>
+
+
+                    <td> <a href="updateOrder?id={{order['_id']}}"><button
+                                class="btn btn-success fw-bold border border-dark"><i class="fa-solid fa-pen"></i>
+                                Update Order</button></a>
+                        <a href="deleteOrder?id={{order['_id']}}"><button
+                                class="btn btn-danger fw-bold border border-dark"
+                                onclick="return confirm('Are you sure?');"><i
+                                    class="fa-solid fa-trash"></i></button></a>
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+
+    </section>
+</body>
+<script>
+    $(document).ready(function () {
+        $('#tblDefault').DataTable({
+            "order": [[0, "desc"]]
+        });
+    });
+
+
+</script>
+
+</html>

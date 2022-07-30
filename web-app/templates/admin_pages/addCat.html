@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Category- Tiger Analytics</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}" />
+  <link rel="stylesheet" href="{{url_for('static', filename='css/custom.css')}}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+  <link rel="shortcut icon" href="{{url_for('static', filename='img/ico.ico')}}">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+
+
+
+
+</head>
+
+<body class="gradient-custom-2">
+  <nav class="navbar" id="mainNav">
+    <div class="container">
+      <a class="navbar navbar-brand"><img src="{{url_for('static', filename='img/tig.jpg')}}" height="50px"> Tiger
+        eCommerce</a>
+
+    </div>
+  </nav>
+  <div class="container card col-md-6 p-2">
+
+    <form method="POST" action="/add_cat">
+      <h2>Add New Category</h2>
+      {%
+      if value == 'added':
+      %}
+      <p class="bg-success text-white p-1 border border-dark rounded"><b>New Category Added</b></p>
+
+      {% endif %}
+      {%
+        if value == 'deleted':
+        %}
+        <p class="bg-danger text-white p-1 border border-dark rounded"><b>Record has been deleted</b></p>
+  
+        {% endif %}
+
+      <br>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Category Name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="catNM" required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Category Desc</label>
+        <div class="col-sm-10">
+          <textarea type="text" class="form-control" name="catDesc">Enter Here</textarea>
+        </div>
+        <br>
+
+      </div>
+      <br>
+      <button class="btn btn-primary col-sm-3" type="submit" name="Submit"><b><i class="fa-solid fa-plus"></i> Add
+          New</b></button>
+
+  </div>
+  </form>
+  </div>
+  <br>
+  <div class="container card">
+    <h2>Old Entries</h2>
+
+    <table class="table table-hover" id="old_entry">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Category</th>
+          <th scope="col">Description</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%for i in range(0, len)%}
+        <tr>
+          <th scope="row">{{i+1}}</th>
+          <td>{{listCat[i]['catName']}}</td>
+          <td>{{listCat[i]['catDesc']}}</td>
+          <td>
+            <a href="editCat?id={{listCat[i]['_id']}}"><button type="button"
+                class="btn btn-success"><b><i class="fa-solid fa-pencil"></i></b></button></a>
+
+            <a href="deleteCat?id={{listCat[i]['_id']}}"><button type="button"
+                class="btn btn-danger" onclick="return confirm('Are you sure?');"><b><i class="fa-solid fa-trash"></i></b></button></a>
+
+          </td>
+        </tr>
+        {%endfor%}
+        <!-- <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr> -->
+
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>
+<script>
+  $(document).ready(function () {
+    $('#old_entry').DataTable();
+  });
+
+
+</script>

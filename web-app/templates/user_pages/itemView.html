@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ItemView - Tiger Analytics</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/custom.css')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="  https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" />
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/ico.ico')}}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
+
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+
+    <script src="{{url_for('static', filename='js/bootstrap.bundle.js')}}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
+        <a class="navbar-brand" href="#"><img src="{{url_for('static', filename='img/tig.jpg')}}" height="50px"> Tiger
+            eCommerce</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <strong><b><i class="fa-solid fa-align-right"></i></b></strong>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active" id="home">
+                    <a class="nav-link" href="/"><i class="fa-solid fa-house"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products"><i class="fa-brands fa-product-hunt"></i> Products</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa-solid fa-list"></i> Category
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        {%for i in listCat %}
+
+                        <a class="dropdown-item" href="viewCat?id={{i['_id']}}"><i class="fa-solid fa-arrow-right"></i>
+                            {{i['catName']}}</a>
+                        {%endfor%}
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user_orders"><i class="fa-solid fa-arrow-down-wide-short"></i> My
+                        Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.tigeranalytics.com/"><i
+                            class="fa-solid fa-earth-asia"></i></i> Company
+                        Website</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="viewCart"><i class="fas fa-shopping-cart"></i> My Cart</a>
+                </li>
+
+
+            </ul>
+
+        </div>
+        <li class="nav-item d-flex flex-row-reverse">
+
+            <ul class="navbar-nav float-right">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="%" id="navbarinsha" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"><span class="fa fa-user "></span> Welcome, {{value}}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarinsha">
+                        <li><a class="dropdown-item" href="profile"><span class="fa fa-user-circle "></span> Profile</a>
+                        </li>
+                        <li><a class="dropdown-item" href="/user_orders"><span
+                                    class="fa fa-arrow-down-wide-short"></span> My
+                                Orders</a></li>
+                        <li><a class="dropdown-item" href="ch_pass"><span class="fa fa-key "></span> Change Password</a>
+                        </li>
+
+                        <hr />
+                        <li><a class="dropdown-item" href="logout"><span class="fa fa-sign-out "></span> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+    </nav>
+</head>
+
+
+
+
+
+<body class="gradient-custom-2">
+
+    <section style="background-color: #eee;" class="container card">
+        <div class="row col-md-12">
+            <div class="col-md-6">
+                <img src="{{url_for('static', filename=itemObj['itemImage'])}}" class="p-2 border border-dark"
+                    alt="{{itemObj['itemName']}}" width="350px">
+            </div>
+            <div class="col-md-6">
+                <h1 class="text-primary ">{{itemObj['itemName']}}</h1>
+                <h5>Description :</h5>
+                <span>{{itemObj['itemDesc']}}</span>
+                <br />
+                <br />
+                <h5>Available Stock : <u class="text-danger">{{itemObj['itemStock']}}</u></h5>
+                {% if itemObj['itemStock']<=1 %} <button class="btn btn-danger" disabled="true"><i
+                        class="fa-solid fa-hand"></i>
+                    Out of Stock </button>
+                    {%else%}
+                    <a href="addCart?id={{itemObj['_id']}}"><button class="btn btn-danger"><i
+                                class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            Add to cart
+                        </button></a>
+                    {%endif%}
+            </div>
+        </div>
+        <br>
+    </section>
+</body>
+<script>
+    $(document).ready(function () {
+        $('#tblDefault').DataTable({
+            "order": [[1, "desc"]]
+        });
+    });
+
+
+</script>
+
+</html>

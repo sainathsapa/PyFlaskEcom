@@ -1,0 +1,22 @@
+<body>
+
+    {%for i in range(0,nl)%}
+  {{listCat[i]['catName']}}
+    {%for j in Products%}
+    
+    {%for k in j%}
+    
+  {% if k['itemCat']==catList[i] %}
+  <br>
+  {{k['itemName']}}
+  <hr>
+  
+  {%endif%}
+    {%endfor%}
+    {%endfor%}
+    {%endfor%}
+  
+  </body>
+  
+  
+  </html>

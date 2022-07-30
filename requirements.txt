@@ -1,0 +1,9 @@
+gunicorn
+wheel
+pytest
+pylint
+pycodestyle
+flake8
+flask
+flask-mongoengine
+pymongo

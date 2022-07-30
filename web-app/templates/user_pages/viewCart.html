@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> My Cart - Tiger Analytics</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/custom.css')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="  https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" />
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/ico.ico')}}">
+    <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
+        <a class="navbar-brand" href="#"><img src="{{url_for('static', filename='img/tig.jpg')}}" height="50px"> Tiger
+            eCommerce</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <strong><b><i class="fa-solid fa-align-right"></i></b></strong>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active" id="home">
+                    <a class="nav-link" href="/"><i class="fa-solid fa-house"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products"><i class="fa-brands fa-product-hunt"></i> Products</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa-solid fa-list"></i> Category
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        {%for i in listCat %}
+
+                        <a class="dropdown-item" href="viewCat?id={{i['_id']}}"><i class="fa-solid fa-arrow-right"></i>
+                            {{i['catName']}}</a>
+                        {%endfor%}
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user_orders"><i class="fa-solid fa-arrow-down-wide-short"></i> My
+                        Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.tigeranalytics.com/"><i
+                            class="fa-solid fa-earth-asia"></i></i> Company
+                        Website</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="viewCart"><i class="fas fa-shopping-cart"></i> My Cart</a>
+                </li>
+
+
+            </ul>
+
+        </div>
+        <li class="nav-item d-flex flex-row-reverse">
+
+            <ul class="navbar-nav float-right">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="%" id="navbarinsha" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"><span class="fa fa-user "></span> Welcome, {{value}}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarinsha">
+                        <li><a class="dropdown-item" href="profile"><span class="fa fa-user-circle "></span> Profile</a>
+                        </li>
+                        <li><a class="dropdown-item" href="/user_orders"><span
+                                    class="fa fa-arrow-down-wide-short"></span> My
+                                Orders</a></li>
+                        <li><a class="dropdown-item" href="ch_pass"><span class="fa fa-key "></span> Change Password</a>
+                        </li>
+
+                        <hr />
+                        <li><a class="dropdown-item" href="logout"><span class="fa fa-sign-out "></span> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+</head>
+
+</nav>
+
+
+
+</html>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+
+<script src="{{url_for('static', filename='js/bootstrap.bundle.js')}}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<body class="gradient-custom-2">
+
+    <div class="card container">
+
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Desc</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {%for i in itemArr%}
+                {%for j in i%}
+                <form method="post" action="placeOrder">
+                    <tr>
+                        <input type="hidden" name="itemId" value="{{j['_id']}}" />
+                        <td class="col-4"> <input type="hidden" name="img" value="{{j['itemImage']}}" /><img
+                                src="{{url_for('static', filename=j['itemImage'])}}" class="p-2" alt="{{j['itemName']}}"
+                                height="150px">
+                        </td>
+                        <td><input type="hidden" name="name" value="{{j['itemName']}}" />{{j['itemName']}}</td>
+                        <td><input type="hidden" name="desc" value="{{j['itemDesc']}}" />{{j['itemDesc']}}</td>
+                        <td><input type="hidden" name="price" value="{{j['itemPrice']}}" />{{j['itemPrice']}} /-</td>
+                        <td><input class="form-control col-md-1" type="number" name="qty" value="1" /></td>
+
+                    </tr>
+                    {%endfor%}
+                    {%endfor%}
+
+            </tbody>
+
+        </table>
+        <br>
+
+        <br>
+
+        <button type="submit" name="submit" class="btn btn-primary col-md-2" value="submit">Place Order</button>
+        <br>
+
+        </form>
+    </div>
+    <br>
+    <br>
+
+
+
+</body>
+
+</html>
